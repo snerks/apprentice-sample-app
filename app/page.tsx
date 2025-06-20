@@ -1,13 +1,13 @@
 'use client';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 // HomePage.tsx
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Box, Button } from '@mui/material';
-import { Vacancy } from './api/vacancies/route';
-import { PostcodeLookupResult } from '@/models/postcodes';
+// import { Container, Typography, Box, Button } from '@mui/material';
+// import { Vacancy } from './api/vacancies/route';
+// import { PostcodeLookupResult } from '@/models/postcodes';
 import { VacanciesResponse } from '@/models/vacancies';
-import BasicGrid from '@/components/BasicGrid';
+// import BasicGrid from '@/components/BasicGrid';
 import ResponsiveCardGrid from '@/components/ResponsiveCardGrid';
 import Pager from '@/components/Pager';
 
@@ -27,7 +27,7 @@ const Home = () => {
 
   useEffect(() => {
     async function fetchVacancies() {
-      const data = await fetchVacanciesCore();
+      await fetchVacanciesCore();
       // setVacanciesResponse(data);
       // setPostcodeLookupResult(data);
     }

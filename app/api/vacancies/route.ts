@@ -2,8 +2,8 @@
 
 // import type { NextApiRequest, NextApiResponse } from 'next';
 
-type SuccessResponse = { data: any };
-type ErrorResponse = { error: string; details?: string };
+// type SuccessResponse = { data: any };
+// type ErrorResponse = { error: string; details?: string };
 
 export interface Vacancy {
   id: number;
@@ -42,8 +42,8 @@ export async function GET(request: Request) {
 
   try {
     //  `https://api.apprenticeships.education.gov.uk/vacancies/vacancy?${searchParamsString}`
-    const apprenticeProxyUrl =
-      'https://apprentice-api.netlify.app/.netlify/functions/vacancies?PageNumber=1&PageSize=25&Sort=DistanceAsc&Lat=51.184342&Lon=-1.857404&DistanceInMiles=5';
+    // const apprenticeProxyUrl =
+    //   'https://apprentice-api.netlify.app/.netlify/functions/vacancies?PageNumber=1&PageSize=25&Sort=DistanceAsc&Lat=51.184342&Lon=-1.857404&DistanceInMiles=5';
 
     // const apprenticeUrl =
     //   'https://api.apprenticeships.education.gov.uk/vacancies/vacancy?PageNumber=1&PageSize=25';

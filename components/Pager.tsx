@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Pagination, CircularProgress, Box } from '@mui/material';
 import { VacanciesResponse } from '@/models/vacancies';
 // import axios from 'axios';
 
 interface PagerProps {
   vacanciesResponse: VacanciesResponse;
-  fetchPage: (pageNumber?: number) => any;
+  fetchPage: (pageNumber?: number) => unknown;
 }
 
 const Pager = (props: PagerProps) => {
-  const { total, totalFiltered } = props.vacanciesResponse;
+  // const { total, totalFiltered } = props.vacanciesResponse;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [totalPages, setTotalPages] = useState(props.vacanciesResponse.totalPages);
   const [currentPage, setCurrentPage] = useState(1);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
 
   //   const fetchPageInfo = async () => {
@@ -30,7 +32,7 @@ const Pager = (props: PagerProps) => {
   //     fetchPageInfo();
   //   }, []);
 
-  const handlePageChange = (event: any, page: number) => {
+  const handlePageChange = (_: unknown, page: number) => {
     setCurrentPage(page);
     // Trigger your page content loading logic here using the new `page`
     props.fetchPage(page);
