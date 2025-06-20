@@ -29,12 +29,27 @@ export interface Vacancy {
 // X-Version: 1
 
 export async function GET(request: Request) {
+  const searchParams = new URL(request.url).searchParams;
+  console.log('searchParams', searchParams);
+
+  const searchParamsString = searchParams.toString();
+  console.log('searchParamsString', searchParamsString);
+  if (searchParamsString) {
+    console.log('searchParamsString', searchParamsString);
+  } else {
+    console.log('No search parameters provided.');
+  }
+
   try {
+    //  `https://api.apprenticeships.education.gov.uk/vacancies/vacancy?${searchParamsString}`
     const apprenticeProxyUrl =
       'https://apprentice-api.netlify.app/.netlify/functions/vacancies?PageNumber=1&PageSize=25&Sort=DistanceAsc&Lat=51.184342&Lon=-1.857404&DistanceInMiles=5';
 
-    const apprenticeUrl =
-      'https://api.apprenticeships.education.gov.uk/vacancies/vacancy?PageNumber=1&PageSize=25';
+    // const apprenticeUrl =
+    //   'https://api.apprenticeships.education.gov.uk/vacancies/vacancy?PageNumber=1&PageSize=25';
+
+    const apprenticeUrl = `https://api.apprenticeships.education.gov.uk/vacancies/vacancy?${searchParamsString}`;
+
     const apiKey = process.env.Ocp_Apim_Subscription_Key || '';
     //     const externalRes = await fetch('https://api.apprenticeships.education.gov.uk/vacancies', {
     //   headers: { 'Ocp-Apim-Subscription-Key': apiKey },
