@@ -22,18 +22,36 @@ export interface Vacancy {
 //   });
 // }
 
+// ~Accept: *application/json*
+// Content-Type: *application/json*
+// ~User-Agent: Thunder Client (https://www.thunderclient.com)
+// Ocp-Apim-Subscription-Key: 79ea9296d41b431dbbb5dbe31e670fa1
+// X-Version: 1
+
 export async function GET(request: Request) {
   try {
-    // const apiKey = process.env.Ocp_Apim_Subscription_Key || '';
+    const apprenticeProxyUrl =
+      'https://apprentice-api.netlify.app/.netlify/functions/vacancies?PageNumber=1&PageSize=25&Sort=DistanceAsc&Lat=51.184342&Lon=-1.857404&DistanceInMiles=5';
+
+    const apprenticeUrl =
+      'https://api.apprenticeships.education.gov.uk/vacancies/vacancy?PageNumber=1&PageSize=25';
+    const apiKey = process.env.Ocp_Apim_Subscription_Key || '';
     //     const externalRes = await fetch('https://api.apprenticeships.education.gov.uk/vacancies', {
     //   headers: { 'Ocp-Apim-Subscription-Key': apiKey },
     // });
-
-    const postcode = 'BA1 1AA';
-    // https://api.postcodes.io/postcodes/:postcode
-    const externalRes = await fetch(`https://api.postcodes.io/postcodes/${postcode}`, {
-      // headers: { 'Ocp-Apim-Subscription-Key': apiKey },
+    const externalRes = await fetch(apprenticeUrl, {
+      headers: {
+        'Ocp-Apim-Subscription-Key': apiKey,
+        'Content-Type': 'application/json',
+        'X-Version': '1',
+      },
     });
+
+    // const postcode = 'BA1 1AA';
+    // // https://api.postcodes.io/postcodes/:postcode
+    // const externalRes = await fetch(`https://api.postcodes.io/postcodes/${postcode}`, {
+    //   // headers: { 'Ocp-Apim-Subscription-Key': apiKey },
+    // });
 
     if (!externalRes.ok) {
       const errText = await externalRes.text();

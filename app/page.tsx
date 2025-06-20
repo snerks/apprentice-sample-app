@@ -6,19 +6,20 @@ import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Button } from '@mui/material';
 import { Vacancy } from './api/vacancies/route';
 import { PostcodeLookupResult } from '@/models/postcodes';
+import { VacanciesResponse } from '@/models/vacancies';
 
 const Home = () => {
-  // const [vacancies, setVacancies] = useState<Vacancy[]>([]);
-  const [postcodeLookupResult, setPostcodeLookupResult] = useState<PostcodeLookupResult | null>(
-    null,
-  );
+  const [vacanciesResponse, setVacanciesResponse] = useState<VacanciesResponse | null>(null);
+  // const [postcodeLookupResult, setPostcodeLookupResult] = useState<PostcodeLookupResult | null>(
+  //   null,
+  // );
 
   useEffect(() => {
     async function fetchVacancies() {
       const response = await fetch('/api/vacancies');
       const data = await response.json();
-      // setVacancies(data);
-      setPostcodeLookupResult(data);
+      setVacanciesResponse(data);
+      // setPostcodeLookupResult(data);
     }
 
     fetchVacancies();
@@ -26,13 +27,16 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Postcode</h1>
-      {/* <ul>
-        {vacancies.map(vacancy => (
-          <li key={vacancy.id}>{vacancy.name}</li>
-        ))}
-      </ul> */}
-      <pre>{JSON.stringify(postcodeLookupResult, null, 2)}</pre>
+      <h1>Vacancies</h1>
+      {vacanciesResponse && (
+        <ul>
+          {vacanciesResponse.vacancies.map(vacancy => (
+            <li key={vacancy.vacancyReference}>{vacancy.title}</li>
+          ))}
+        </ul>
+      )}
+      {/* <pre>{JSON.stringify(postcodeLookupResult, null, 2)}</pre> */}
+      <pre>{JSON.stringify(vacanciesResponse, null, 2)}</pre>
     </div>
   );
 
