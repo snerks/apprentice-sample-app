@@ -14,7 +14,6 @@ const Pager = (props: PagerProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [totalPages, setTotalPages] = useState(props.vacanciesResponse.totalPages);
   const [currentPage, setCurrentPage] = useState(1);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
 
   //   const fetchPageInfo = async () => {
@@ -32,10 +31,16 @@ const Pager = (props: PagerProps) => {
   //     fetchPageInfo();
   //   }, []);
 
-  const handlePageChange = (_: unknown, page: number) => {
+  const handlePageChange = async (_: unknown, page: number) => {
     setCurrentPage(page);
     // Trigger your page content loading logic here using the new `page`
-    props.fetchPage(page);
+    try {
+      setLoading(true);
+      await props.fetchPage(page);
+      setLoading(false);
+    } catch (error) {
+      console.error('Attempt to fetch a page went wrong:', error);
+    }
   };
 
   return (
