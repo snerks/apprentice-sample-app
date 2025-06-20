@@ -35,6 +35,11 @@ function ResponsiveCardGrid(props: ResponsiveCardGridProps) {
             <Card>
               <CardContent>
                 <Typography variant="h6">{vacancy.title}</Typography>
+                <Typography variant="subtitle1">{vacancy.employerName}</Typography>
+                <Typography variant="subtitle1">
+                  Posted: {new Date(vacancy.postedDate).toISOString()}
+                </Typography>
+
                 <Typography variant="body2">{vacancy.description}</Typography>
               </CardContent>
             </Card>
@@ -42,20 +47,6 @@ function ResponsiveCardGrid(props: ResponsiveCardGridProps) {
         </Grid>
       ))}
     </Grid>
-    //     {
-    //       /* <Grid container spacing={2}>
-    //   {cards.map((card, index) => (
-    //     <Grid item xs={12} sm={6} md={4} key={index}>
-    //       <Card>
-    //         <CardContent>
-    //           <Typography variant="h6">{card.title}</Typography>
-    //           <Typography variant="body2">{card.description}</Typography>
-    //         </CardContent>
-    //       </Card>
-    //     </Grid>
-    //   ))}
-    // </Grid> */
-    //     }
   );
 }
 

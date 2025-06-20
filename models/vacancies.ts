@@ -9,7 +9,7 @@ export interface Vacancy {
   title: string;
   description: string;
   numberOfPositions: number;
-  postedDate: Date;
+  postedDate: string; // Date;
   closingDate: Date;
   startDate: Date;
   wage: Wage;

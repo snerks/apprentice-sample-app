@@ -19,11 +19,12 @@ const Home = () => {
 
   async function fetchVacanciesCore(pageNumber?: number) {
     const pageNumberQuery = pageNumber ? `PageNumber=${pageNumber}` : '';
-    const response = await fetch(`/api/vacancies?${pageNumberQuery}`);
+    const response = await fetch(`/api/vacancies?PageSize=25&${pageNumberQuery}`);
     const data = await response.json();
     setVacanciesResponse(data);
     return data;
   }
+
   useEffect(() => {
     async function fetchVacancies() {
       const data = await fetchVacanciesCore();
