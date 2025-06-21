@@ -57,8 +57,8 @@ const Pager = (props: PagerProps) => {
             page={currentPage}
             onChange={handlePageChange}
             color="primary"
-            showFirstButton
-            showLastButton
+            // showFirstButton
+            // showLastButton
           />
           {/* <Typography>
             Page: {currentPage} of {totalPages}
