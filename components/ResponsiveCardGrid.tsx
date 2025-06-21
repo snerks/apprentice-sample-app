@@ -1,6 +1,8 @@
 import React from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Grid, Card, CardContent, Typography, Paper, styled } from '@mui/material';
 import { Vacancy } from '@/models/vacancies';
+import HoverCard from './HoverCard';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -34,18 +36,21 @@ function ResponsiveCardGrid(props: ResponsiveCardGridProps) {
         {vacancies.map((vacancy, index) => (
           <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
             <Item sx={{ boxShadow: 'none' }}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6">{vacancy.title}</Typography>
-                  <Typography variant="subtitle1">{vacancy.employerName}</Typography>
-                  <Typography variant="subtitle1">
-                    {/* Posted: {new Date(vacancy.postedDate).toISOString()} */}
-                    Posted: {vacancy.postedDate.toDateString()}
-                  </Typography>
+              {/* <Card>
+              </Card> */}
+              <HoverCard
+                content={
+                  <CardContent>
+                    <Typography variant="h6">{vacancy.title}</Typography>
+                    <Typography variant="subtitle1">{vacancy.employerName}</Typography>
+                    <Typography variant="subtitle1">
+                      Posted: {vacancy.postedDate.toDateString()}
+                    </Typography>
 
-                  <Typography variant="body2">{vacancy.description}</Typography>
-                </CardContent>
-              </Card>
+                    <Typography variant="body2">{vacancy.description}</Typography>
+                  </CardContent>
+                }
+              />
             </Item>
           </Grid>
         ))}
