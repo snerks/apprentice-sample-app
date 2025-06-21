@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Pagination, CircularProgress, Box } from '@mui/material';
 import { VacanciesResponse } from '@/models/vacancies';
+// import page from '@/app/page';
 // import axios from 'axios';
 
 interface PagerProps {
@@ -48,12 +49,21 @@ const Pager = (props: PagerProps) => {
       {loading ? (
         <CircularProgress />
       ) : (
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={handlePageChange}
-          color="primary"
-        />
+        <Box
+          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '200px' }}
+        >
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+            showFirstButton
+            showLastButton
+          />
+          {/* <Typography>
+            Page: {currentPage} of {totalPages}
+          </Typography> */}
+        </Box>
       )}
     </Box>
   );

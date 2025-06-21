@@ -6,10 +6,11 @@ import React, { useEffect, useState } from 'react';
 // import { Container, Typography, Box, Button } from '@mui/material';
 // import { Vacancy } from './api/vacancies/route';
 // import { PostcodeLookupResult } from '@/models/postcodes';
-import { VacanciesResponse } from '@/models/vacancies';
+import { VacanciesResponse, VacancySchema } from '@/models/vacancies';
 // import BasicGrid from '@/components/BasicGrid';
 import ResponsiveCardGrid from '@/components/ResponsiveCardGrid';
 import Pager from '@/components/Pager';
+// import z from 'zod/v4';
 
 const Home = () => {
   const [vacanciesResponse, setVacanciesResponse] = useState<VacanciesResponse | null>(null);
@@ -19,10 +20,18 @@ const Home = () => {
 
   async function fetchVacanciesCore(pageNumber?: number) {
     const pageNumberQuery = pageNumber ? `PageNumber=${pageNumber}` : '';
-    const response = await fetch(`/api/vacancies?PageSize=25&${pageNumberQuery}`);
-    const data = await response.json();
-    setVacanciesResponse(data);
-    return data;
+    const response = await fetch(`/api/vacancies?Sort=AgeAsc&PageSize=25&${pageNumberQuery}`);
+    const vacanciesResponse = (await response.json()) as VacanciesResponse;
+
+    const validated = VacancySchema.parse(vacanciesResponse.vacancies[0]);
+    console.log(validated.postedDate instanceof Date); // <-- "true"
+
+    const transformedVacancies = vacanciesResponse.vacancies.map(v => VacancySchema.parse(v));
+
+    const transformedVacanciesResponse = { ...vacanciesResponse, vacancies: transformedVacancies };
+
+    setVacanciesResponse(transformedVacanciesResponse);
+    return vacanciesResponse;
   }
 
   useEffect(() => {

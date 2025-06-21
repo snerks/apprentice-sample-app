@@ -28,25 +28,29 @@ function ResponsiveCardGrid(props: ResponsiveCardGridProps) {
   const { vacancies } = props;
 
   return (
-    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-      {vacancies.map((vacancy, index) => (
-        <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
-          <Item>
-            <Card>
-              <CardContent>
-                <Typography variant="h6">{vacancy.title}</Typography>
-                <Typography variant="subtitle1">{vacancy.employerName}</Typography>
-                <Typography variant="subtitle1">
-                  Posted: {new Date(vacancy.postedDate).toISOString()}
-                </Typography>
+    <>
+      {/* <pre>{JSON.stringify(vacancies, null, 2)}</pre> */}
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        {vacancies.map((vacancy, index) => (
+          <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
+            <Item sx={{ boxShadow: 'none' }}>
+              <Card>
+                <CardContent>
+                  <Typography variant="h6">{vacancy.title}</Typography>
+                  <Typography variant="subtitle1">{vacancy.employerName}</Typography>
+                  <Typography variant="subtitle1">
+                    {/* Posted: {new Date(vacancy.postedDate).toISOString()} */}
+                    Posted: {vacancy.postedDate.toDateString()}
+                  </Typography>
 
-                <Typography variant="body2">{vacancy.description}</Typography>
-              </CardContent>
-            </Card>
-          </Item>
-        </Grid>
-      ))}
-    </Grid>
+                  <Typography variant="body2">{vacancy.description}</Typography>
+                </CardContent>
+              </Card>
+            </Item>
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 }
 
